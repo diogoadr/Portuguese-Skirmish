@@ -21,43 +21,8 @@ client.on('message', message => {
     const authorid = message.author.id
     const user = client.users.cache.get(authorid)
     
-
-    if(message.content === '?pt'){
-
-        const rolePT = message.guild.roles.cache.find(role => role.name === 'PT')
-        const roleENG = message.guild.roles.cache.find(role => role.name === 'ENG')
-
-        if(message.member.roles.cache.some(role => role.name === 'ENG')){
-            message.member.roles.remove(roleENG.id)
-            user.send('Português :flag_pt:\nEscolheste o idioma português, caso queiras trocar basta mandares !eng e terás acesso ao idioma inglês\nEnglish :flag_gb:\nYou have chosen the Portuguese language, if you want to change just send !eng and you will have access to the English language')
-            message.member.roles.add(rolePT.id)
-            message.delete()
-
-        }else{
-            user.send('Português :flag_pt:\nEscolheste o idioma português, caso queiras trocar basta mandares !eng e terás acesso ao idioma inglês\nEnglish :flag_gb:\nYou have chosen the Portuguese language, if you want to change just send !eng and you will have access to the English language')
-            message.member.roles.add(rolePT.id)
-            message.delete()
-        }
-
-    }
-
-    if(message.content === '?eng'){
-        
-        const rolePT = message.guild.roles.cache.find(role => role.name === 'PT')
-        const roleENG = message.guild.roles.cache.find(role => role.name === 'ENG')
-
-        if(message.member.roles.cache.some(role => role.name === 'PT')){
-            message.member.roles.remove(rolePT.id)
-            user.send('English :flag_gb:\nYou have chosen the English language, if you want to change just send !pt and you will have access to the Portuguese language\nPortuguês :flag_pt:\nEscolheste o idioma inglês, caso queiras trocar basta mandares !pt e terás acesso ao idioma português')
-            message.member.roles.add(roleENG.id)
-            message.delete()
-
-        }else{
-            user.send('English :flag_gb:\nYou have chosen the English language, if you want to change just send !pt and you will have access to the Portuguese language\nPortuguês :flag_pt:\nEscolheste o idioma inglês, caso queiras trocar basta mandares !pt e terás acesso ao idioma português')
-            message.member.roles.add(roleENG.id)
-            message.delete()
-        }
-
+    if(message.content === 'teste'){
+        message.reply('Done! Its all working')
     }
 
     if(message.content === '!create'){
@@ -235,7 +200,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
     let member = reaction.message.guild.members.cache.get(user.id)
     
     if(reaction.emoji.name === '🇵🇹'){
-        if(reaction.message.member.roles.cache.some(role => role.name === 'ENG')){
+        if(member.roles.cache.some(role => role.name === 'ENG')){
             member.roles.remove(roleGB.id)
             member.roles.add(rolePT.id)
         }else{
@@ -243,7 +208,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
         }
     }
     if(reaction.emoji.name === '🇬🇧'){
-        if(reaction.message.member.roles.cache.some(role => role.name === 'PT')){
+        if(member.roles.cache.some(role => role.name === 'PT')){
             member.roles.remove(rolePT.id)
             member.roles.add(roleGB.id)
         }else{
